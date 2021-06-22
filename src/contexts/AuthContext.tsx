@@ -11,6 +11,8 @@ type User = {
 type AuthContextType = {
   user: User | undefined;
   signInWithgoogle: () => Promise<void>;
+  signInWithgithub: () => Promise<void>;
+  signInWithfacebook: () => Promise<void>;
 };
 
 type AuthContextProviderProps = {
@@ -63,9 +65,50 @@ function AuthContextProvider(props: AuthContextProviderProps) {
       });
     }
   }
+
+  async function signInWithgithub() {
+    const provider = new firebase.auth.GithubAuthProvider();
+
+    const result = await auth.signInWithPopup(provider);
+
+    if (result.user) {
+      const { displayName, photoURL, uid } = result.user;
+
+      if (!displayName || !photoURL) {
+        throw new Error('Missing information from Github Account');
+      }
+
+      setUser({
+        id: uid,
+        name: displayName,
+        avatar: photoURL
+      });
+    }
+  }
+
+  async function signInWithfacebook() {
+    const provider = new firebase.auth.FacebookAuthProvider();
+
+    const result = await auth.signInWithPopup(provider);
+
+    if (result.user) {
+      const { displayName, photoURL, uid } = result.user;
+
+      if (!displayName || !photoURL) {
+        throw new Error('Missing information from Github Account');
+      }
+
+      setUser({
+        id: uid,
+        name: displayName,
+        avatar: photoURL
+      });
+    }
+  }
+
   return (
 
-    <AuthContext.Provider value={{ user, signInWithgoogle }}>
+    <AuthContext.Provider value={{ user, signInWithgoogle, signInWithgithub, signInWithfacebook }}>
       {props.children}
     </AuthContext.Provider>
   );

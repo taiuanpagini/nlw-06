@@ -8,7 +8,7 @@
 
     background: #835afd;
     color: #fff;
-    
+
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -20,7 +20,7 @@
     }
 
     strong {
-      font: 700 36px 'Poppins', sans-serif;
+      font: 700 36px "Poppins", sans-serif;
       line-height: 42px;
       margin-top: 16px;
     }
@@ -58,7 +58,7 @@
     h2 {
       font-size: 24px;
       margin: 64px 0 24px;
-      font-family: 'Poppins', sans-serif;
+      font-family: "Poppins", sans-serif;
     }
 
     form {
@@ -74,7 +74,8 @@
         margin-top: 16px;
       }
 
-      button, input {
+      button,
+      input {
         width: 100%;
       }
     }
@@ -83,7 +84,7 @@
       font-size: 14px;
       color: #737380;
       margin-top: 16px;
-      
+
       a {
         color: #e559f9;
       }
@@ -114,6 +115,20 @@
     &:hover {
       filter: brightness(0.9);
     }
+
+    &.github {
+      margin-top: 10px;
+      background: #424242;
+    }
+
+    &.facebook {
+      margin-top: 10px;
+      background: #3b5998;
+
+      img {
+        margin-right: 3px;
+      }
+    }
   }
 
   .separator {
@@ -125,7 +140,7 @@
     align-items: center;
 
     &::before {
-      content: '';
+      content: "";
       flex: 1;
       height: 1px;
       background: #a8a8b3;
@@ -133,7 +148,7 @@
     }
 
     &::after {
-      content: '';
+      content: "";
       flex: 1;
       height: 1px;
       background: #a8a8b3;
