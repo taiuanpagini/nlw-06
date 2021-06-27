@@ -122,7 +122,6 @@ function AuthContextProvider(props: AuthContextProviderProps) {
   }
 
   return (
-
     <AuthContext.Provider value={{ user, setUser, signInWithgoogle, signInWithgithub, signInWithfacebook }}>
       {props.children}
     </AuthContext.Provider>

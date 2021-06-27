@@ -29,7 +29,7 @@ function NewRoom() {
       authorId: user?.id,
     });
 
-    history.push(`/room/${firebaseRoom.key}`);
+    history.push(`/admin/room/${firebaseRoom.key}`);
   }
 
   function handleUser() {

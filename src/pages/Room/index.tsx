@@ -24,7 +24,6 @@ function Room() {
 
   const { questions, title } = useRoom(roomId);
 
-
   async function handleSendQuestion(event: FormEvent) {
     event.preventDefault();
 
@@ -113,6 +112,10 @@ function Room() {
               author={question.author}
               isAnswered={question.isAnswered}
               isHighlighted={question.isHighlighted}
+              isReply={false}
+              roomId={roomId}
+              questionId={question.id}
+              reply={question.reply}
             >
               {
                 !question.isAnswered && (

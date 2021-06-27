@@ -12,12 +12,14 @@ import answerImg from '../../assets/images/answer.svg';
 
 import '../../styles/room.scss';
 import { database } from '../../services/firebase';
+import { useModal } from '../../hooks/useModal';
 
 type RoomParams = {
   id: string;
 };
 
 function AdminRoom() {
+  const { setModal } = useModal();
   const history = useHistory();
   const params = useParams<RoomParams>();
   const roomId = params.id;
@@ -25,9 +27,13 @@ function AdminRoom() {
   const { questions, title } = useRoom(roomId);
 
   async function handleDeleteQuestion(questionId: string) {
-    if (window.confirm('Tem certeza que você deseja excluir esta pergunta?')) {
-      await database.ref(`rooms/${roomId}/questions/${questionId}`).remove();
-    }
+    setModal({
+      active: true,
+      title: 'Encerrar Sala',
+      description: 'Tem certeza que deseja encerrar a sala?',
+      questionId: questionId,
+      roomId: roomId
+    });
   }
 
   async function handleEndRoom() {
@@ -85,6 +91,10 @@ function AdminRoom() {
               author={question.author}
               isAnswered={question.isAnswered}
               isHighlighted={question.isHighlighted}
+              isReply={true}
+              roomId={roomId}
+              questionId={question.id}
+              reply={question.reply}
             >
               {
                 !question.isAnswered && (

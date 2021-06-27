@@ -7,19 +7,25 @@ import AdminRoom from "./pages/AdminRoom";
 
 import AuthContextProvider from './contexts/Auth';
 import ModalContextProvider from './contexts/Modal';
+import ModalComponent from './components/Modal';
 
 
 function App() {
   return (
     <BrowserRouter>
       <AuthContextProvider>
-        <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/rooms/new" component={NewRoom} />
-          <Route path="/room/:id" component={Room} />
+        <ModalContextProvider>
+          <Switch>
+            <Route path="/" exact component={Home} />
+            <Route path="/rooms/new" component={NewRoom} />
+            <Route path="/room/:id" component={Room} />
 
-          <Route path="/admin/room/:id" component={AdminRoom} />
-        </Switch>
+            <Route path="/admin/room/:id" component={AdminRoom} />
+          </Switch>
+
+
+          <ModalComponent />
+        </ModalContextProvider>
       </AuthContextProvider>
     </BrowserRouter>
   );

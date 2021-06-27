@@ -37,7 +37,7 @@ function Home() {
     if (user) {
       history.push("/rooms/new");
     }
-  }, [user]);
+  }, [user, history]);
 
   async function handleJoinRoom(event: FormEvent) {
     event.preventDefault();
