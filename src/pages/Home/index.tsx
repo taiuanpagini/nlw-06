@@ -1,18 +1,20 @@
 import { FormEvent } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import illustrationImg from '../assets/images/illustration.svg';
-import logoImg from '../assets/images/logo.svg';
-import googleIconImg from '../assets/images/google-icon.svg';
-import githubIconImg from '../assets/images/github-icon.svg';
-import facebookIconImg from '../assets/images/facebook-icon.svg';
-import loginIcon from '../assets/images/login-icon.svg';
-import Button from '../components/Button';
+import illustrationImg from '../../assets/images/illustration.svg';
+import logoImg from '../../assets/images/logo.svg';
+import googleIconImg from '../../assets/images/google-icon.svg';
+import githubIconImg from '../../assets/images/github-icon.svg';
+import facebookIconImg from '../../assets/images/facebook-icon.svg';
+import loginIcon from '../../assets/images/login-icon.svg';
+import Button from '../../components/Button';
 
-import '../styles/auth.scss';
-import { useAuth } from '../hooks/useAuth';
+import '../../styles/auth.scss';
+import { useAuth } from '../../hooks/useAuth';
 import { useState } from 'react';
-import { database } from '../services/firebase';
+import { database } from '../../services/firebase';
+import { useEffect } from 'react';
+import toast from 'react-hot-toast';
 
 function Home() {
   const history = useHistory();
@@ -29,9 +31,13 @@ function Home() {
         await signInWithfacebook();
       }
     }
-
-    history.push("/rooms/new");
   };
+
+  useEffect(() => {
+    if (user) {
+      history.push("/rooms/new");
+    }
+  }, [user]);
 
   async function handleJoinRoom(event: FormEvent) {
     event.preventDefault();
@@ -43,7 +49,12 @@ function Home() {
     const roomRef = await database.ref(`rooms/${roomCode}`).get();
 
     if (!roomRef.exists()) {
-      alert('Room does not exists.');
+      toast.error('Room does not exists.');
+      return;
+    }
+
+    if (roomRef.val().endedAt) {
+      toast.error('Room already closed.');
       return;
     }
 

@@ -10,6 +10,15 @@
       justify-content: space-between;
       align-items: center;
 
+      >div {
+        display: flex;
+        gap: 16px;
+
+        button {
+          height: 40px;
+        }
+      }
+
       > img {
         max-height: 45px;
       }
@@ -92,6 +101,42 @@
             font-weight: 500;
             cursor: pointer;
           }
+        }
+      }
+    }
+
+    .question-list {
+      margin-top: 32px;
+
+      .no-question {
+        max-width: 300px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        flex-direction: column;
+         
+        img {
+          width: 150px;
+          margin: 0 auto;
+        }
+
+        h2 {
+          font-family: 'Poppins', sans-serif;
+          font-weight: 600;
+          font-size: 18px;
+          line-height: 27px;
+          color: #29292E;
+          margin: 15px 0 5px;
+        }
+
+        p {
+          font-family: Roboto;
+          font-weight: normal;
+          font-size: 14px;
+          line-height: 21px;
+          color: #737380;
+
         }
       }
     }
